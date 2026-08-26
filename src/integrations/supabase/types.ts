@@ -14,7 +14,155 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      areas: {
+        Row: {
+          color: string | null
+          created_at: string
+          display_order: number
+          icon: string | null
+          id: string
+          name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          color?: string | null
+          created_at?: string
+          display_order?: number
+          icon?: string | null
+          id?: string
+          name: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          color?: string | null
+          created_at?: string
+          display_order?: number
+          icon?: string | null
+          id?: string
+          name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "areas_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          current_points: number
+          id: string
+          lifetime_xp: number
+          role: Database["public"]["Enums"]["app_role"]
+          timezone: string
+          updated_at: string
+          username: string
+        }
+        Insert: {
+          created_at?: string
+          current_points?: number
+          id: string
+          lifetime_xp?: number
+          role?: Database["public"]["Enums"]["app_role"]
+          timezone?: string
+          updated_at?: string
+          username: string
+        }
+        Update: {
+          created_at?: string
+          current_points?: number
+          id?: string
+          lifetime_xp?: number
+          role?: Database["public"]["Enums"]["app_role"]
+          timezone?: string
+          updated_at?: string
+          username?: string
+        }
+        Relationships: []
+      }
+      tasks: {
+        Row: {
+          area_id: string
+          base_points: number
+          completed_at: string | null
+          completion_reward_applied: boolean
+          created_at: string
+          deadline_at: string | null
+          deadline_penalty_applied: boolean
+          deadline_timezone: string | null
+          description: string | null
+          id: string
+          postponement_count: number
+          priority: Database["public"]["Enums"]["task_priority"]
+          status: Database["public"]["Enums"]["task_status"]
+          title: string
+          total_negative_applied: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          area_id: string
+          base_points?: number
+          completed_at?: string | null
+          completion_reward_applied?: boolean
+          created_at?: string
+          deadline_at?: string | null
+          deadline_penalty_applied?: boolean
+          deadline_timezone?: string | null
+          description?: string | null
+          id?: string
+          postponement_count?: number
+          priority?: Database["public"]["Enums"]["task_priority"]
+          status?: Database["public"]["Enums"]["task_status"]
+          title: string
+          total_negative_applied?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          area_id?: string
+          base_points?: number
+          completed_at?: string | null
+          completion_reward_applied?: boolean
+          created_at?: string
+          deadline_at?: string | null
+          deadline_penalty_applied?: boolean
+          deadline_timezone?: string | null
+          description?: string | null
+          id?: string
+          postponement_count?: number
+          priority?: Database["public"]["Enums"]["task_priority"]
+          status?: Database["public"]["Enums"]["task_status"]
+          title?: string
+          total_negative_applied?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tasks_area_id_fkey"
+            columns: ["area_id"]
+            isOneToOne: false
+            referencedRelation: "areas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "tasks_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +171,9 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      app_role: "user" | "admin"
+      task_priority: "low" | "medium" | "high"
+      task_status: "todo" | "in_progress" | "done"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +300,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["user", "admin"],
+      task_priority: ["low", "medium", "high"],
+      task_status: ["todo", "in_progress", "done"],
+    },
   },
 } as const

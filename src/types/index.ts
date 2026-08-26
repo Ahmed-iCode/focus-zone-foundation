@@ -1,27 +1,13 @@
 // Core FocusZone types (Step 1 foundation only).
+// These are thin aliases over the generated database types so they can never
+// drift from the actual schema.
 
-export type TaskStatus = "todo" | "doing" | "done";
+import type { Tables, Enums } from "@/integrations/supabase/types";
 
-export interface Profile {
-  id: string;
-  full_name: string | null;
-  created_at: string;
-}
+export type AppRole = Enums<"app_role">; // "user" | "admin"
+export type TaskPriority = Enums<"task_priority">; // "low" | "medium" | "high"
+export type TaskStatus = Enums<"task_status">; // "todo" | "in_progress" | "done"
 
-export interface Area {
-  id: string;
-  user_id: string;
-  name: string;
-  color: string | null;
-  created_at: string;
-}
-
-export interface Task {
-  id: string;
-  user_id: string;
-  area_id: string | null;
-  title: string;
-  status: TaskStatus;
-  due_date: string | null;
-  created_at: string;
-}
+export type Profile = Tables<"profiles">;
+export type Area = Tables<"areas">;
+export type Task = Tables<"tasks">;

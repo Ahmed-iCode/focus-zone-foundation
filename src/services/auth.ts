@@ -47,7 +47,10 @@ export function friendlyAuthError(message: string): string {
   if (text.includes("user already registered")) {
     return "An account with this email already exists. Try signing in instead.";
   }
-  if (text.includes("password")) {
+  if (text.includes("weak") || text.includes("pwned") || text.includes("easy to guess")) {
+    return "That password has appeared in a data breach. Please choose a different one.";
+  }
+  if (text.includes("should be at least") || text.includes("password")) {
     return "Password must be at least 8 characters.";
   }
   if (text.includes("rate limit") || text.includes("too many")) {

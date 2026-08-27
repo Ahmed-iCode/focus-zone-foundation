@@ -37,8 +37,8 @@ export default function ForgotPasswordPage() {
 
         {sent ? (
           <p className="mt-6 text-center text-sm text-muted-foreground">
-            If an account exists for that email, we've sent a password reset link. Please
-            check your inbox.
+            If an account exists for that email, we've sent a password reset link. Please check your
+            inbox.
           </p>
         ) : (
           <form onSubmit={handleSubmit} className="mt-8 space-y-4" noValidate>

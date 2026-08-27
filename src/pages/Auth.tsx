@@ -5,11 +5,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  friendlyAuthError,
-  loginUser,
-  registerUser,
-} from "@/services/auth";
+import { friendlyAuthError, loginUser, registerUser } from "@/services/auth";
 import { validateEmail, validatePassword, validateUsername } from "@/lib/validation";
 
 type Mode = "login" | "register";
@@ -127,11 +123,7 @@ export default function AuthPage() {
           {notice && <p className="text-sm text-muted-foreground">{notice}</p>}
 
           <Button type="submit" className="w-full" disabled={submitting}>
-            {submitting
-              ? "Please wait..."
-              : mode === "login"
-                ? "Sign in"
-                : "Create account"}
+            {submitting ? "Please wait..." : mode === "login" ? "Sign in" : "Create account"}
           </Button>
         </form>
 
